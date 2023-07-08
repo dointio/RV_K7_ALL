@@ -13,7 +13,6 @@ int main()
                 // If a key was pressed
                 case SDL_KEYDOWN:
                 case SDL_KEYUP:
-                    printf("hhh\n");
                     break;
                 default: break;
             }

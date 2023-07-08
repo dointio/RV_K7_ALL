@@ -19,7 +19,6 @@
 word_t vaddr_ifetch(vaddr_t addr, int len) {
   word_t paddr_fetch(paddr_t addr, int len);
   if(isa_mmu_check(addr, len, MEM_TYPE_IFETCH)){
-    printf("H");
     return paddr_fetch(isa_mmu_translate(addr, len, MEM_TYPE_IFETCH), len);
   }
   else{
@@ -30,7 +29,6 @@ word_t vaddr_ifetch(vaddr_t addr, int len) {
 
 word_t vaddr_read(vaddr_t addr, int len) {
   if(isa_mmu_check(addr, len, MEM_TYPE_READ)){
-    printf("H");
     return paddr_read(isa_mmu_translate(addr, len, MEM_TYPE_READ), len);
   }
   else{
@@ -40,7 +38,6 @@ word_t vaddr_read(vaddr_t addr, int len) {
 
 void vaddr_write(vaddr_t addr, int len, word_t data) {
   if(isa_mmu_check(addr, len, MEM_TYPE_WRITE)){
-    printf("H");
     paddr_write(isa_mmu_translate(addr, len, MEM_TYPE_WRITE), len, data);
   }
   else{

@@ -164,7 +164,6 @@ int main()
 {
     // MainElfLoader("mul_64");
     MainElfLoader("/home/xpzh/ysyx/ysyx-workbench/nanos-lite/build/nanos-lite-riscv64-nemu.elf");
-    printf("HHHH\n");
     FunctionObjP ite = mainFuncP;
     while(1){
       if(ite == NULL){
