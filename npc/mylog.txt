@@ -1,0 +1,32 @@
+2023.5.28 11:20
+正在修改原riscv_one的内容。注意：这里的原riscv_one是存在逻辑环的版本，当初为了在fpga上跑进行了修改：
+    将几个fifo设置成了cut_ready。
+    以及给lsu加了个fifo。
+当然，这些在原riscv_one中没有干，也就是现在的npc下的riscv没有解决逻辑环问题.
+因为我想之后换方法解决。另外，verilator会提示存在逻辑环，这很好！！！（当然目前屏蔽了）
+
+目前，修改了ifu，将ifu与icache分离，以后icache将作为单独模块。
+    ifu部分，加了一个instr通道模块，实际就是确保最多有一个instr req访问等待响应，这是目前的bpu与jump方案的基本依赖。
+    原本这个功能是在icache中的，现在看来不能指望icache，因为原则上这个功能与icache无关。
+    我想了一下，要是这个功能想大改，支持多条instr访问等待，就要加计数器，这样才能保证jump与bpu正常。
+
+2023.6.7
+目前，64位riscv可以通过ysyx的所有检测了。
+BPU的bug也修复了。（预测情况的缓存问题）
+
+2023.6.11
+fix oitf bug, add jump check, when jump, the long instr is no used!
+fix addrmap, check flash\sram overflow!!
+
+2023.6.14
+comple sgpu simulation, next step: to fpga!
+
+2023.6.16
+fpga上ddr部分完成，优化了bpu与pipectrl的关键路径，约束也写的更好了,添加了多周期路径（jtag的halt与）.
+对reset进行了逻辑展宽，但是没写多周期约束，因为时序还是收敛的就没管。。
+时序无问题了。但是速度还是不行，还没实验sgpu。
+
+6.18
+完成了sgpu功能！！！！sgpu使用axi通道读取ddr，为ddr添加了axi_arbt，目前能完整的支持cpu与sgpu访问ddr。
+但是显示速度很慢，我算了一下，一帧800*600个数据，看了一下大约每个像素点56条指令，如果100M cpu时钟，每秒大约3.7帧。。。
+这还是按照每个周期指令都有效算的，结果实际1秒可能都没有一帧，要1秒多。。。这个问题之后再说吧。。。

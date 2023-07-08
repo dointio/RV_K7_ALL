@@ -1,0 +1,16 @@
+!Makefile
+!*.mk
+!README.md
+!.gitignore
+!csrc/*
+!example/*
+!gtktcls/*
+!listfiles/*
+!mylog.txt
+.vscode/
+.history/
+obj_*/
+vivadoPrj/**
+vsrc_old_fix/
+*.vcd
+*.log
