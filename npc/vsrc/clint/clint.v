@@ -103,20 +103,7 @@ st_pipe_stage #(
     .rst        (rst)
 );
 
-assign clint_icb_rsp_err = 1'b0;
-`ifdef MYRISCV_ARCH_64
-    assign clint_icb_rsp_rdata =    ({64{timer_l_sel_r}} & {32'd0, timer_l_r}) |
-                                    ({64{timer_h_sel_r}} & {timer_h_r, 32'd0}) |
-                                    ({64{timercmp_l_sel_r}} & {32'd0, timercmp_l_r}) | 
-                                    ({64{timercmp_h_sel_r}} & {timercmp_h_r, 32'd0}) |
-                                    ({64{softintr_sel_r}} & {32'd0, softintr_r});
-`else
-    assign clint_icb_rsp_rdata =    ({32{timer_l_sel_r}} & timer_l_r) |
-                                    ({32{timer_h_sel_r}} & timer_h_r) |
-                                    ({32{timercmp_l_sel_r}} & timercmp_l_r) | 
-                                    ({32{timercmp_h_sel_r}} & timercmp_h_r) |
-                                    ({32{softintr_sel_r}} & softintr_r);
-`endif
+
 
 wire [31:0] timer_l_nxt;
 wire [31:0] timer_l_r;
@@ -167,6 +154,19 @@ assign soft_irq_o = softintr_r[0];
 assign tmr_irq_o = ({timercmp_h_r, timercmp_l_r} <= {timer_h_r, timer_l_r});
 
 
-
+assign clint_icb_rsp_err = 1'b0;
+`ifdef MYRISCV_ARCH_64
+    assign clint_icb_rsp_rdata =    ({64{timer_l_sel_r}} & {32'd0, timer_l_r}) |
+                                    ({64{timer_h_sel_r}} & {timer_h_r, 32'd0}) |
+                                    ({64{timercmp_l_sel_r}} & {32'd0, timercmp_l_r}) | 
+                                    ({64{timercmp_h_sel_r}} & {timercmp_h_r, 32'd0}) |
+                                    ({64{softintr_sel_r}} & {32'd0, softintr_r});
+`else
+    assign clint_icb_rsp_rdata =    ({32{timer_l_sel_r}} & timer_l_r) |
+                                    ({32{timer_h_sel_r}} & timer_h_r) |
+                                    ({32{timercmp_l_sel_r}} & timercmp_l_r) | 
+                                    ({32{timercmp_h_sel_r}} & timercmp_h_r) |
+                                    ({32{softintr_sel_r}} & softintr_r);
+`endif
 
 endmodule

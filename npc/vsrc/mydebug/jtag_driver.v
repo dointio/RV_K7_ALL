@@ -69,28 +69,28 @@ module jtag_driver #(
     output wire[DTM_REQ_BITS - 1:0] dtm_req_data_o;
 
     // JTAG StateMachine
-    parameter TEST_LOGIC_RESET  = 4'h0;
-    parameter RUN_TEST_IDLE     = 4'h1;
-    parameter SELECT_DR         = 4'h2;
-    parameter CAPTURE_DR        = 4'h3;
-    parameter SHIFT_DR          = 4'h4;
-    parameter EXIT1_DR          = 4'h5;
-    parameter PAUSE_DR          = 4'h6;
-    parameter EXIT2_DR          = 4'h7;
-    parameter UPDATE_DR         = 4'h8;
-    parameter SELECT_IR         = 4'h9;
-    parameter CAPTURE_IR        = 4'hA;
-    parameter SHIFT_IR          = 4'hB;
-    parameter EXIT1_IR          = 4'hC;
-    parameter PAUSE_IR          = 4'hD;
-    parameter EXIT2_IR          = 4'hE;
-    parameter UPDATE_IR         = 4'hF;
+    localparam TEST_LOGIC_RESET  = 4'h0;
+    localparam RUN_TEST_IDLE     = 4'h1;
+    localparam SELECT_DR         = 4'h2;
+    localparam CAPTURE_DR        = 4'h3;
+    localparam SHIFT_DR          = 4'h4;
+    localparam EXIT1_DR          = 4'h5;
+    localparam PAUSE_DR          = 4'h6;
+    localparam EXIT2_DR          = 4'h7;
+    localparam UPDATE_DR         = 4'h8;
+    localparam SELECT_IR         = 4'h9;
+    localparam CAPTURE_IR        = 4'hA;
+    localparam SHIFT_IR          = 4'hB;
+    localparam EXIT1_IR          = 4'hC;
+    localparam PAUSE_IR          = 4'hD;
+    localparam EXIT2_IR          = 4'hE;
+    localparam UPDATE_IR         = 4'hF;
 
     // DTM regs
-    parameter REG_BYPASS       = 5'b11111;
-    parameter REG_IDCODE       = 5'b00001;
-    parameter REG_DMI          = 5'b10001;
-    parameter REG_DTMCS        = 5'b10000;
+    localparam REG_BYPASS       = 5'b11111;
+    localparam REG_IDCODE       = 5'b00001;
+    localparam REG_DMI          = 5'b10001;
+    localparam REG_DTMCS        = 5'b10000;
 
     reg[IR_BITS - 1:0] ir_reg;
     reg[SHIFT_REG_BITS - 1:0] shift_reg;
